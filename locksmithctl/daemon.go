@@ -107,7 +107,14 @@ func rebootAndSleep(lgn *login1.Conn) {
 	if 0 != lines {
 		dlog.Noticef("Logins detected, delaying reboot for %d minutes.", delaymins)
 		time.Sleep(loginsRebootDelay)
+	} else {
+		//Don't override delay when logins are found
+		rebootDelayEnv := os.Getenv("LOCKSMITHD_REBOOT_DELAY")
+		if specifiedRebootDelaySecs, ok := rebootDelayEnv.(int); ok {
+			time.Sleep(specifiedRebootDelaySecs * time.Second)
+		}
 	}
+
 	lgn.Reboot(false)
 	dlog.Info("Reboot sent. Going to sleep.")
 
