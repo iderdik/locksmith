@@ -23,9 +23,9 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"strconv"
 	"sync"
 	"syscall"
-	"strconv"
 	"time"
 
 	"github.com/coreos/locksmith/Godeps/_workspace/src/github.com/coreos/go-systemd/dbus"
@@ -113,13 +113,13 @@ func rebootAndSleep(lgn *login1.Conn) {
 		rebootDelayEnv := os.Getenv("LOCKSMITHD_REBOOT_DELAY")
 		//ignore if not set
 		if rebootDelayEnv != "" {
-			specifiedRebootDelaySecs, err := strconv.Atoi(rebootDelayEnv);   
+			specifiedRebootDelaySecs, err := strconv.Atoi(rebootDelayEnv)
 			if err != nil {
 				dlog.Warningf("Invalid value specified for LOCKSMITHD_REBOOT_DELAY: %v. Received %v expected int. Using 0.", err, rebootDelayEnv)
 			} else {
 				time.Sleep((time.Duration(int64(specifiedRebootDelaySecs))) * time.Second)
 			}
-		} 
+		}
 	}
 
 	lgn.Reboot(false)
