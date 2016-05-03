@@ -117,7 +117,7 @@ func rebootAndSleep(lgn *login1.Conn) {
 			if err != nil {
 				dlog.Warningf("Invalid value specified for LOCKSMITHD_REBOOT_DELAY: %v. Received %v expected int. Using 0.", err, rebootDelayEnv)
 			} else {
-				time.Sleep(specifiedRebootDelaySecs * time.Second)
+				time.Sleep((time.Duration(int64(specifiedRebootDelaySecs))) * time.Second)
 			}
 		} 
 	}
