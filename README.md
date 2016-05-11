@@ -140,14 +140,14 @@ function.
 
 
 ## Reboot delay
-Some systems might want to perform actinos before a reboot occurs. These systems can watch the [semaphore](#semaphore) in `etcd` for changes to the `holders` and then do any tasks (e.g. pulling machines out of worker pools, load-balancers) necessary. Using `LOCKSMITHD_REBOOT_DELAY` environment variable grants the system time to perform these actions before the  machine reboots.
+Some systems might want to perform actions before a reboot occurs. These systems can watch the [semaphore](#semaphore) in `etcd` for changes to the `holders` and then do any tasks (e.g. pulling machines out of worker pools, load-balancers) necessary. Using `LOCKSMITHD_REBOOT_DELAY` environment variable grants the system time to perform these actions before the  machine reboots.
 
 Usage:
 ```
 LOCKSMITHD_REBOOT_DELAY=300
 ```
 
-This would cause the machine to wait 300 seconds (5 minutes) after getting the lock befor rebooting.
+This would cause the machine to wait 300 seconds (5 minutes) after getting the lock before rebooting.
 
 
 ## Implementation details 
